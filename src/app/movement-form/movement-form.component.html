@@ -1,0 +1,41 @@
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-3 underline">
+    </h1>
+    <div *ngIf="typeMov === 'INPUT'">
+        <h1>Entrada de inventario</h1>
+    </div>
+    <div *ngIf="typeMov === 'OUT'">
+        <h1>Salida de inventario</h1>
+    </div>
+    <form [formGroup]="movementForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="typeMov === 'INPUT'">
+        <label>expirationDate</label>
+        <input
+          formControlName="expirationDate"
+          type="date"
+          class="border border-gray-300 p-2 rounded-md mb-3"
+        />
+      </div>
+      <div>
+        <label >Cantidad: </label>
+        <input
+            formControlName="quantity"
+            type="number"
+            class="border border-gray-300 p-2 rounded-md mb-3"
+        />
+        </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700"
+      >
+        {{"Ejecutar " + typeMov + " de inventario"}}
+      </button>
+      <button
+        (click)="goToRoot()"
+        class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 mr-2"
+        >
+        Cancelar
+      </button>
+    </form>
+  </div>
+

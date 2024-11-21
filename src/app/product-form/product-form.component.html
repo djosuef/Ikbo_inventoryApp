@@ -1,0 +1,27 @@
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-3 underline">
+      {{"Create"}} Producto
+    </h1>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Nombre:</label>
+        <input
+          formControlName="name"
+          type="text"
+          class="border border-gray-300 p-2 rounded-md mb-3"
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700"
+      >
+        {{"Create" }}
+      </button>
+      <button
+      (click)="goToRoot()"
+      class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 mr-2"
+      >
+      Cancelar
+    </button>
+    </form>
+  </div>

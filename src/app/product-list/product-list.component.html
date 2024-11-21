@@ -1,0 +1,59 @@
+<div class="container">
+    <h1 class="text-center my-4">Lista de productos</h1>
+    <button
+      (click)="goToCreate()"
+      class="btn btn-primary mb-4"
+    >
+      Agregar Producto
+    </button>
+    <input
+      type="text"
+      placeholder="Buscar producto"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterProducts()"
+      class="form-control mb-4"
+    />
+    @if (products.length > 0) {
+    <div class="col-md-12">
+      <h1 class="my-4"></h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 5, currentPage: page }">
+            <td>{{ product.name }}</td>
+            <td>{{ product.stock }}</td>
+            <td class="border px-4 py-2">
+              <button
+                (click)="goToWatch(product.id.toString())"
+                class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 mr-2"
+              >
+                Ver Movimientos
+              </button>
+              <button
+                (click)="goMoveStock(product.id.toString(), 'INPUT')"
+                class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 mr-2"
+              >
+                Ingresar Stock
+              </button>
+              <button
+              (click)="goMoveStock(product.id.toString(), 'OUT')"
+                class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 mr-2"
+              >
+                Retirar Stock
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+    } @else {
+    <p>No se encuentran productos para mostrar.</p>
+    }
+  </div>

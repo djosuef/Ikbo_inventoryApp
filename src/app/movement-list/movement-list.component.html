@@ -1,0 +1,47 @@
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Lotes del producto con existencias</h1>
+    <button
+      (click)="goToRoot()"
+      class="btn btn-primary mb-4"
+      >
+      Regresar al listado de productos
+    </button>
+    @if (movements.length > 0) {
+    <table class="table-auto w-full">
+      <thead>
+
+        <tr>
+          <th class="px-4 py-2">Tipo de Movimiento</th>
+          <th class="px-4 py-2">Fecha del movimiento</th>
+          <th class="px-4 py-2">Cantidad</th>
+          <th class="px-4 py-2">Fecha de expiración</th>
+          <th class="px-4 py-2">Cantidad actual en stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (movement of movements; track movements) {
+        <tr>
+          <td class="border px-4 py-2">{{ movement.typeMov }}</td>
+          <td class="border px-4 py-2">{{ movement.dateMov }}</td>
+            <td class="border px-4 py-2">{{ movement.quantity }}</td>
+            <td class="border px-4 py-2">{{ movement.expirationDate }}</td>
+            <td class="border px-4 py-2">{{ movement.currentQuantity }}</td>
+          
+          <td class="border px-4 py-2" *ngIf="!viewAll">
+            <button
+              (click)="goToSelectLot(movement.id.toString(), idProduct)"
+              class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 mr-2"
+            >
+              Seleccionar
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    } @else {
+    <p>No hay movimientos para mostrar.</p>
+    }
+</div>
+
+
